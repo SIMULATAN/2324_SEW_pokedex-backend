@@ -1,4 +1,4 @@
-package me.simulatan.pokedex;
+package me.simulatan.pokedex.model;
 
 public class CaughtPokemon {
 	String name;

@@ -1,4 +1,4 @@
-package me.simulatan.pokedex;
+package me.simulatan.pokedex.model;
 
 public enum PokeType {
 	GRASS,

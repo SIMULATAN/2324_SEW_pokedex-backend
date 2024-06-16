@@ -3,6 +3,10 @@ package me.simulatan.pokedex;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import me.simulatan.pokedex.model.CaughtPokemon;
+import me.simulatan.pokedex.model.PokeType;
+import me.simulatan.pokedex.model.PokedexStats;
+import me.simulatan.pokedex.model.Pokemon;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,6 +20,12 @@ public class PokemonResource {
 	@Path("list")
 	public List<Pokemon> getList() {
 		return pokemonRepository.findAll();
+	}
+
+	@GET
+	@Path("caught")
+	public List<Pokemon> getCaught() {
+		return pokemonRepository.getCaught();
 	}
 
 	@GET
@@ -64,5 +74,11 @@ public class PokemonResource {
 	@Path("random")
 	public Pokemon getRandomPokemon() {
 		return pokemonRepository.getRandomPokemon();
+	}
+
+	@GET
+	@Path("stats")
+	public PokedexStats getStats() {
+		return pokemonRepository.getStats();
 	}
 }

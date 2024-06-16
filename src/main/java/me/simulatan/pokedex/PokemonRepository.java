@@ -4,6 +4,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import me.simulatan.pokedex.model.PokeType;
+import me.simulatan.pokedex.model.PokedexStats;
+import me.simulatan.pokedex.model.Pokemon;
 
 import java.util.List;
 
@@ -27,6 +30,12 @@ public class PokemonRepository {
 		return entityManager.find(Pokemon.class, id);
 	}
 
+	public List<Pokemon> getCaught() {
+		return entityManager
+			.createQuery("SELECT p FROM Pokemon p WHERE p.catchCount > 0", Pokemon.class)
+			.getResultList();
+	}
+
 	public Pokemon getRandomPokemon() {
 		return entityManager.createQuery("SELECT p FROM Pokemon p ORDER BY random()", Pokemon.class)
 			.setMaxResults(1)
@@ -36,5 +45,11 @@ public class PokemonRepository {
 	@Transactional
 	public void update(Pokemon pokemon) {
 		entityManager.merge(pokemon);
+	}
+
+	public PokedexStats getStats() {
+		return entityManager
+			.createQuery("SELECT NEW me.simulatan.pokedex.model.PokedexStats(SUM(catchCount)) FROM Pokemon p", PokedexStats.class)
+			.getSingleResult();
 	}
 }

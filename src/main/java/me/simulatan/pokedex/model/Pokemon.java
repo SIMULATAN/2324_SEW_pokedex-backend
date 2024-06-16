@@ -1,4 +1,4 @@
-package me.simulatan.pokedex;
+package me.simulatan.pokedex.model;
 
 import jakarta.persistence.*;
 import org.eclipse.microprofile.config.ConfigProvider;
